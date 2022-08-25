@@ -39,22 +39,15 @@ router.post('/logout' , (req ,res) => {
 
 
 router.get('/information_user/:id' ,(req , res) => { 
-	const searchDataUser = async (callBack) => {
-			if (req.session.name) {
-			await	info_users.findOne({"id_user"  : req.params.id})
-					.then(data => {
-					
-					res.send(data)
-				}).then(err => console.log(err))
-			}
-			
-			callBack()
+	if (req.session.name) {
+		info_users.findOne({"id_user"  : req.params.id})
+			.then(data => {
+				res.send(data)
+			})
+			.then(err => console.log(err))
 	}
-	function endreq () {
-		res.end()
-	}
-	searchDataUser(endreq)
-		
+
+	res.end()	
 })
 
 
